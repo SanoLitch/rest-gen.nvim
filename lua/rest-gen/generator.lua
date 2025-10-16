@@ -226,4 +226,3 @@ function M.generate_single(endpoint, security_schemes, spec)
 end
 
 return M
-

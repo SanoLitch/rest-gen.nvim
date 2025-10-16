@@ -95,4 +95,3 @@ function M.resolve_ref(spec, ref_string)
 end
 
 return M
-

@@ -7,7 +7,7 @@ First off, thank you for considering contributing! Your help is greatly apprecia
 ### Reporting Bugs
 
 - **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/your-github-username/rest-gen.nvim/issues).
-- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/your-github-username/rest-gen.nvim/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
+- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/SanoLitch/rest-gen.nvim/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
 
 ### Suggesting Enhancements
 
@@ -16,9 +16,9 @@ First off, thank you for considering contributing! Your help is greatly apprecia
 ### Pull Requests
 
 1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
+2. Create your feature branch (`git checkout -b feature/my-feature`).
+3. Commit your changes (`git commit -m 'add some feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
 5. Open a Pull Request.
 
 Please try to follow the existing code style. Adding comments to your code where it's not self-explanatory is also a good practice.

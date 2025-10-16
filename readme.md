@@ -1,11 +1,11 @@
-rest-gen.nvim
+# rest-gen.nvim
 
 **Automatically generate HTTP requests for `rest.nvim` from your OpenAPI/Swagger specifications.**
 
 This Neovim plugin saves you from the hassle of manually creating and maintaining `.http` files. It reads your OpenAPI/Swagger specification (local or remote) and generates ready-to-use requests directly in your editor.
 
 <!-- TODO: Insert a GIF demonstration here -->
-<!-- ![swagger-rest.nvim Demo](link_to_your_gif.gif) -->
+<!-- ![rest-gen.nvim Demo](link_to_your_gif.gif) -->
 
 ---
 
@@ -37,7 +37,7 @@ This Neovim plugin saves you from the hassle of manually creating and maintainin
 ```lua
 -- In your plugins file
 return {
-  "your-github-username/swagger-rest.nvim",
+  "SanoLitch/rest-gen.nvim",
   dependencies = { "rest-nvim/rest.nvim", "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   -- Example configuration (optional)
   opts = {
@@ -50,7 +50,7 @@ return {
     },
   },
   config = function(_, opts)
-    require("swagger-rest").setup(opts)
+    require("rest-gen").setup(opts)
   end,
 }
 ```
@@ -74,3 +74,4 @@ return {
 ## 📄 License
 
 This plugin is distributed under the MIT License. See the `LICENSE` file for more details.
+
