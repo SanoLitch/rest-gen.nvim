@@ -1,0 +1,10 @@
+# General
+.DS_Store
+
+# Neovim session files
+*.swp
+*.swo
+*~
+
+# Local development files (if any)
+local_settings.lua

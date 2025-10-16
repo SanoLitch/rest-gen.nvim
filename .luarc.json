@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "runtime.version": "LuaJIT",
+  "workspace.library": [
+    "/usr/share/nvim/runtime/lua",
+    "/home/sano/.local/share/lazyvim/lazy/plenary.nvim/lua",
+    "/home/sano/.local/share/lazyvim/lazy/telescope.nvim/lua"
+  ],
+  "workspace.checkThirdParty": false,
+  "diagnostics.globals": [
+    "vim"
+  ]
+}

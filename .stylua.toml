@@ -1,0 +1,11 @@
+# .stylua.toml
+
+# Set the column width (line length)
+column_width = 120
+
+# Use single quotes for strings where possible
+quote_style = "AutoPreferSingle"
+
+# Indentation style
+indent_type = "Spaces"
+indent_width = 2
