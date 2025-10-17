@@ -8,3 +8,6 @@
 
 # Local development files (if any)
 local_settings.lua
+
+# Tests
+.lazy

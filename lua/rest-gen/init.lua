@@ -1,9 +1,9 @@
 local M = {}
 
-local core = require("swagger-rest.core")
-local parser = require("swagger-rest.parser")
-local generator = require("swagger-rest.generator")
-local telescope_picker = require("swagger-rest.telescope")
+local core = require("rest-gen.core")
+local parser = require("rest-gen.parser")
+local generator = require("rest-gen.generator")
+local telescope_picker = require("rest-gen.telescope")
 
 local config = {
   default_source = "https://petstore.swagger.io/v2/swagger.json",
@@ -13,7 +13,7 @@ local config = {
   },
 }
 
-local utils = require("swagger-rest.utils")
+local utils = require("rest-gen.utils")
 
 local function picker_with_input()
   vim.ui.input({ prompt = "Swagger Source URL or Path: " }, function(source)

@@ -1,0 +1,570 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/users": {
+      "post": {
+        "operationId": "UserController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully registered.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Invalid input data."
+          },
+          "409": {
+            "description": "Conflict. User with this email already exists."
+          }
+        },
+        "summary": "Register a new user",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/users/login": {
+      "post": {
+        "operationId": "UserController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully logged in. Access and refresh tokens are set as httpOnly cookies."
+          },
+          "401": {
+            "description": "Unauthorized. Invalid credentials."
+          }
+        },
+        "summary": "Log in a user and set httpOnly cookies",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "operationId": "UserController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns the current user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "Get current user profile",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/sessions": {
+      "post": {
+        "operationId": "GameSessionController_createGameSession",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameSessionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Game session created. Returns GameSessionDto with status GENERATING_MAP (map is generated asynchronously).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSessionDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "Create a new game session",
+        "tags": [
+          "Game Sessions"
+        ]
+      }
+    },
+    "/api/v1/sessions/{id}/players": {
+      "post": {
+        "operationId": "GameSessionController_joinGameSession",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Game Session ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to join has been accepted and is being processed."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Game session not found."
+          },
+          "409": {
+            "description": "Conflict. Session is full or not accepting new players."
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "Request to join a game session as a player",
+        "tags": [
+          "Game Sessions"
+        ]
+      }
+    },
+    "/api/v1/sessions/{id}": {
+      "get": {
+        "operationId": "GameSessionController_getGameSession",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Game Session ID",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the game session details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameSessionDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Game session not found."
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "Get a game session by ID",
+        "tags": [
+          "Game Sessions"
+        ]
+      }
+    },
+    "/api/v1/maps/{id}": {
+      "get": {
+        "operationId": "MapController_getMapById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Map ID",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the map details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Map not found."
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "Get a map by ID",
+        "tags": [
+          "Map"
+        ]
+      }
+    },
+    "/api/v1/maps/{id}/ascii": {
+      "get": {
+        "operationId": "MapController_getMapAsAscii",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Map ID",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the map in ASCII art format.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get map as ASCII art",
+        "tags": [
+          "Map"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Auto-Strategy API",
+    "description": "The Auto-Strategy API description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "api",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "cookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "accessToken"
+      }
+    },
+    "schemas": {
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "test@example.com",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "User password (at least 6 characters)",
+            "minLength": 6
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique user identifier (UUID)",
+            "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email address",
+            "example": "test@example.com"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the user was created",
+            "example": "2023-10-27T10:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "When the user was last updated",
+            "example": "2023-10-27T10:00:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "test@example.com",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "User password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "CreateGameSessionDto": {
+        "type": "object",
+        "properties": {
+          "playersCount": {
+            "type": "number",
+            "description": "Number of players in the game session",
+            "minimum": 2,
+            "maximum": 8,
+            "example": 2
+          },
+          "mapSize": {
+            "type": "number",
+            "description": "Size of the map for the game session",
+            "minimum": 100,
+            "maximum": 1000,
+            "example": 200
+          }
+        },
+        "required": [
+          "playersCount",
+          "mapSize"
+        ]
+      },
+      "GameSessionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique game session identifier (UUID)",
+            "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+          },
+          "mapId": {
+            "type": "string",
+            "description": "Identifier of the map for this session (UUID)",
+            "example": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the game session",
+            "enum": [
+              "GENERATING_MAP",
+              "WAITING",
+              "IN_PROGRESS",
+              "FINISHED"
+            ],
+            "example": "WAITING"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the game session was created",
+            "example": "2023-10-27T10:00:00.000Z"
+          },
+          "finishedAt": {
+            "type": "string",
+            "description": "When the game session was finished",
+            "example": "2023-10-27T11:00:00.000Z",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "createdAt"
+        ]
+      },
+      "MapSizeDto": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "number",
+            "description": "Width of the map",
+            "example": 100
+          },
+          "height": {
+            "type": "number",
+            "description": "Height of the map",
+            "example": 100
+          }
+        },
+        "required": [
+          "width",
+          "height"
+        ]
+      },
+      "SpawnPointDto": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "description": "X coordinate of the spawn point",
+            "example": 10
+          },
+          "y": {
+            "type": "number",
+            "description": "Y coordinate of the spawn point",
+            "example": 10
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ]
+      },
+      "MapDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique map identifier (UUID)",
+            "example": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+          },
+          "size": {
+            "description": "Dimensions of the map",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MapSizeDto"
+              }
+            ]
+          },
+          "terrainData": {
+            "type": "string",
+            "description": "2D array representing the map terrain",
+            "example": [
+              [
+                "Dirt",
+                "Rock",
+                "Bedrock"
+              ],
+              [
+                "Dirt",
+                "Dirt",
+                "Bedrock"
+              ]
+            ],
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Dirt",
+                  "Rock",
+                  "Bedrock",
+                  "Empty",
+                  "GoldCluster",
+                  "CrystalCluster",
+                  "IronCluster"
+                ]
+              }
+            },
+            "enum": [
+              "Dirt",
+              "Rock",
+              "Bedrock",
+              "Empty",
+              "GoldCluster",
+              "CrystalCluster",
+              "IronCluster"
+            ]
+          },
+          "spawnPoints": {
+            "description": "List of spawn points for players",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpawnPointDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "size",
+          "terrainData",
+          "spawnPoints"
+        ]
+      }
+    }
+  }
+}

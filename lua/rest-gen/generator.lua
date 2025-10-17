@@ -1,5 +1,5 @@
 local M = {}
-local utils = require("swagger-rest.utils")
+local utils = require("rest-gen.utils")
 
 -- Forward declaration
 local get_endpoint_request

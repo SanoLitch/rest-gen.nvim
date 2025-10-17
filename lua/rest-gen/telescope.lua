@@ -1,15 +1,15 @@
 local M = {}
 
-local core = require("swagger-rest.core")
-local parser = require("swagger-rest.parser")
-local generator = require("swagger-rest.generator")
+local core = require("rest-gen.core")
+local parser = require("rest-gen.parser")
+local generator = require("rest-gen.generator")
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local conf = require("telescope.config").values
 
-local utils = require("swagger-rest.utils")
+local utils = require("rest-gen.utils")
 
 ---
 --Opens the Telescope picker to select an endpoint.
