@@ -6,7 +6,7 @@ local generator = require("rest-gen.generator")
 local telescope_picker = require("rest-gen.telescope")
 
 local config = {
-  default_source = "https://petstore.swagger.io/v2/swagger.json",
+  default_source = "https://petstore3.swagger.io/v3/openapi.json",
   keymaps = {
     picker_default = "<leader>hr",
     picker_input = "<leader>hR",
