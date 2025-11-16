@@ -1,4 +1,4 @@
-# rest-gen.nvim
+# rest-gen.nvim (WIP: UNDER DEVELOPMENT!!!)
 
 **Automatically generate HTTP requests for `rest.nvim` from your OpenAPI/Swagger specifications.**
 
